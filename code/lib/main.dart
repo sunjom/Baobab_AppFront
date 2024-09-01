@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
+        //Materia3 기본 테마로 고정되어 있기 때문에, 이걸 false해줘야 꾸미기가 적용됨.
+        useMaterial3: false,
       ),
       home: const MyHomePage(),
     );
@@ -29,6 +30,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  final postList=[
+    {
+      "title":"Sample Title",
+    }
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,19 +43,35 @@ class _MyHomePageState extends State<MyHomePage> {
         title:const Text("Test Title"),
       ),
       
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        //가로 스크롤 가능.
+        //scrollDirection: Axis.horizontal,
         children: [
-          TextButton(onPressed: () => print("testButton Clicked"), child: const Text("Text Button")),
-          GestureDetector(onTap: () => print("GestureDetector used"),
-          child: Container(
-            width:200,
-            height: 200,
-            color:Colors.amber
-          )
-          )
+         postContainer(title:'title1',color:Colors.red),
+         postContainer(title:'title2'),
+         postContainer(title:'title3'),
+         postContainer(title:'title4'),
+         postContainer(title:'title5'),
         ]
       )
     );
   }
+  Widget postContainer({String title='', Color color=Colors.blue}){
+      return Column(
+        children: [
+          Container(
+            padding:const EdgeInsets.all(10),
+            child:Text(title,
+              style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),),
+          ),
+          Container(
+            width:MediaQuery.of(context).size.width,
+            height: 200,
+            color:color
+          )]
+      );
+    }
 }
