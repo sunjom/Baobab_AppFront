@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
-//StatelessWidget : 상태가 변하지 않는 위젯
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//StatefulWidget : 상태가 변하는 경우
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -37,19 +36,19 @@ class _MyHomePageState extends State<MyHomePage> {
       "color":Colors.red,
     },
     {
-      "number":"1",
+      "number":"2",
       "color":Colors.yellow,
     },
     {
-      "number":"2",
+      "number":"3",
       "color":Colors.blue,
     },
     {
-      "number":"3",
+      "number":"4",
       "color":Colors.green,
     },
     {
-      "number":"4",
+      "number":"5",
       "color":Colors.pink,
     },
   ];
@@ -58,22 +57,59 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Test Title"),
+        title: const Text("Test Title"),
       ),
-      //crossAxisCount => 한행에 존재할 수 있는 값의 수, crossAxisSpacing: gap-x, mainAxisSpacing: gap-y
-      body: GridView.builder(gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-      itemCount: postList.length, itemBuilder: (BuildContext con,int index){
-        return postContainer(number:postList[index]["number"] as String, color:postList[index]['color']as Color);
-      }),
+      //SingleChildScrollView로 묶거나 Scroll기능이 있는 ListView로 만들면 됨.
+      body: SingleChildScrollView(
+        //크게 2개로 나누기 위해 사용
+        child: Column(
+          children: [
+            //반으로 나눈 것중 위쪽 담당.
+            SizedBox(
+              //크기 지정함.
+              height: MediaQuery.of(context).size.height/2,
+              //반에서 또 스크롤 기능 추가.
+              child:SingleChildScrollView(
+                child: Column(
+                children: [  
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    color:Colors.green
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    color:Colors.red
+                  ),
+                ]
+                ),
+              ) 
+            )
+          ,
+          SizedBox(
+              height: MediaQuery.of(context).size.height/2,
+              child:SingleChildScrollView(
+                child: Column(
+                children: [  
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    color:Colors.green
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
+                    color:Colors.red
+                  ),
+                ]
+                ),
+              ) 
+            )
+          ],
+        ),
+      )
     );
   }
 
-  Container postContainer({String number="123", Color color=Colors.black}) {
-    return Container(
-        height: 200,
-        color:color,
-        //Text Center로 보내는 함수
-        child: Center(child: Text("Box $number")),
-      );
-  }
 }
