@@ -36,50 +36,26 @@ class _MyHomePageState extends State<MyHomePage> {
         title:const Text("Test Title"),
       ),
       body: Container(
-        alignment: Alignment.topLeft,
-        //Column or Row, Row를 두개 쓰고싶다면 Ctrl + .
-        child: Column(
-          // mainAxisAlignment => justify-content
-          //crossAxisAlignment => align-items
-          // Row => 가로축 기준 가운데
-          // Column => 세로축 기준 가운데.
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        //배경색 주는 방법.
+        width: MediaQuery.of(context).size.width,
+        height:MediaQuery.of(context).size.height,
+        color:Colors.yellow,
+        //Stack을 사용하면 Container들끼리 겹침 => Position을 정해줘야 함.
+        child: Stack(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.height/2,
-                  height:200,
-                  color: Colors.blue,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.height/2,
-                  height:200,
-                  color: Colors.red,
-                )
-              ],
+            Container(
+              width: 200,
+              height:200,
+              color:Colors.blue,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  //MediaQuery.of(context).size 앱 화면 크기
-                  //MediaQuery.of(context).size.width(or height)
-                  width: MediaQuery.of(context).size.width/2,
-                  height:200,
-                  color: Colors.blue,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width/2,
-                  height:200,
-                  color: Colors.red,
-                )
-              ],
+            Container(
+              width: 200,
+              height:200,
+              margin: const EdgeInsets.only(top:50, left:50),
+              color:Colors.red,
             )
           ],
-        )
+        ),
       )
     );
   }
