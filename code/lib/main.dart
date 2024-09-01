@@ -33,8 +33,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final postList=[
     {
-      "title":"Sample Title",
-    }
+      "title":"Sample Title1",
+      "color":Colors.red,
+    },
+    {
+      "title":"Sample Title2",
+      "color":Colors.blue,
+    },
+    {
+      "title":"Sample Title3",
+      "color":Colors.green,
+    },
+    {
+      "title":"Sample Title4",
+      "color":Colors.yellow,
+    },
+    {
+      "title":"Sample Title5",
+      "color":Colors.pink,
+    },
   ];
   @override
   Widget build(BuildContext context) {
@@ -42,17 +59,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title:const Text("Test Title"),
       ),
-      
-      body: ListView(
-        //가로 스크롤 가능.
-        //scrollDirection: Axis.horizontal,
-        children: [
-         postContainer(title:'title1',color:Colors.red),
-         postContainer(title:'title2'),
-         postContainer(title:'title3'),
-         postContainer(title:'title4'),
-         postContainer(title:'title5'),
-        ]
+      //ListView.builder로 객체값을 이용할 수 있음.
+      body: ListView.builder(
+        itemCount: postList.length,
+        itemBuilder: (BuildContext con, int index){
+          return postContainer(
+            //as로 type확정 
+            title: postList[index]["title"] as String,
+            color: postList[index]["color"] as Color,
+          );
+        },
       )
     );
   }
