@@ -31,63 +31,32 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final postList=[
-    {
-      "title":"Sample Title1",
-      "color":Colors.red,
-    },
-    {
-      "title":"Sample Title2",
-      "color":Colors.blue,
-    },
-    {
-      "title":"Sample Title3",
-      "color":Colors.green,
-    },
-    {
-      "title":"Sample Title4",
-      "color":Colors.yellow,
-    },
-    {
-      "title":"Sample Title5",
-      "color":Colors.pink,
-    },
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title:const Text("Test Title"),
       ),
-      //ListView.builder로 객체값을 이용할 수 있음.
-      body: ListView.builder(
-        itemCount: postList.length,
-        itemBuilder: (BuildContext con, int index){
-          return postContainer(
-            //as로 type확정 
-            title: postList[index]["title"] as String,
-            color: postList[index]["color"] as Color,
-          );
-        },
+      //crossAxisCount => 한행에 존재할 수 있는 값의 수, crossAxisSpacing: gap-x, mainAxisSpacing: gap-y
+      body: GridView(
+        scrollDirection: Axis.horizontal,
+        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 15.0,mainAxisSpacing: 12.0),
+      children: [
+        postContainer(text:'1'),
+        postContainer(text:'2'),
+        postContainer(text:'3'),
+        postContainer(text:'4'),
+      ],
       )
     );
   }
-  Widget postContainer({String title='', Color color=Colors.blue}){
-      return Column(
-        children: [
-          Container(
-            padding:const EdgeInsets.all(10),
-            child:Text(title,
-              style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),),
-          ),
-          Container(
-            width:MediaQuery.of(context).size.width,
-            height: 200,
-            color:color
-          )]
+
+  Container postContainer({String text=""}) {
+    return Container(
+        height: 200,
+        color:Colors.amber,
+        //Text Center로 보내는 함수
+        child: Center(child: Text(text)),
       );
-    }
+  }
 }
