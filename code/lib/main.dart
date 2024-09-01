@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
       home: const MyHomePage(),
@@ -33,28 +33,54 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("Test"),
+        title:const Text("Test Title"),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text("Drawer Headr"),
+      body: Container(
+        alignment: Alignment.topLeft,
+        //Column or Row, Row를 두개 쓰고싶다면 Ctrl + .
+        child: Column(
+          // mainAxisAlignment => justify-content
+          //crossAxisAlignment => align-items
+          // Row => 가로축 기준 가운데
+          // Column => 세로축 기준 가운데.
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.height/2,
+                  height:200,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.height/2,
+                  height:200,
+                  color: Colors.red,
+                )
+              ],
             ),
-            ListTile(
-              title: Text("Menu 1"),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  //MediaQuery.of(context).size 앱 화면 크기
+                  //MediaQuery.of(context).size.width(or height)
+                  width: MediaQuery.of(context).size.width/2,
+                  height:200,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width/2,
+                  height:200,
+                  color: Colors.red,
+                )
+              ],
+            )
           ],
-        )),
-
-      body:const Center(
-        child:Text("Hello Worlds"),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () => print("Clicked"),child:const Icon(Icons.mouse),),
+        )
+      )
     );
   }
 }
