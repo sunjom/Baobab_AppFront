@@ -31,6 +31,29 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  final postList = [
+    {
+      "number":"1",
+      "color":Colors.red,
+    },
+    {
+      "number":"1",
+      "color":Colors.yellow,
+    },
+    {
+      "number":"2",
+      "color":Colors.blue,
+    },
+    {
+      "number":"3",
+      "color":Colors.green,
+    },
+    {
+      "number":"4",
+      "color":Colors.pink,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,25 +61,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title:const Text("Test Title"),
       ),
       //crossAxisCount => 한행에 존재할 수 있는 값의 수, crossAxisSpacing: gap-x, mainAxisSpacing: gap-y
-      body: GridView(
-        scrollDirection: Axis.horizontal,
-        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 15.0,mainAxisSpacing: 12.0),
-      children: [
-        postContainer(text:'1'),
-        postContainer(text:'2'),
-        postContainer(text:'3'),
-        postContainer(text:'4'),
-      ],
-      )
+      body: GridView.builder(gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+      itemCount: postList.length, itemBuilder: (BuildContext con,int index){
+        return postContainer(number:postList[index]["number"] as String, color:postList[index]['color']as Color);
+      }),
     );
   }
 
-  Container postContainer({String text=""}) {
+  Container postContainer({String number="123", Color color=Colors.black}) {
     return Container(
         height: 200,
-        color:Colors.amber,
+        color:color,
         //Text Center로 보내는 함수
-        child: Center(child: Text(text)),
+        child: Center(child: Text("Box $number")),
       );
   }
 }
