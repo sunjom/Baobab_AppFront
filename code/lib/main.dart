@@ -35,27 +35,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title:const Text("Test Title"),
       ),
-      body: Container(
-        //배경색 주는 방법.
-        width: MediaQuery.of(context).size.width,
-        height:MediaQuery.of(context).size.height,
-        color:Colors.yellow,
-        //Stack을 사용하면 Container들끼리 겹침 => Position을 정해줘야 함.
-        child: Stack(
-          children: [
-            Container(
-              width: 200,
-              height:200,
-              color:Colors.blue,
-            ),
-            Container(
-              width: 200,
-              height:200,
-              margin: const EdgeInsets.only(top:50, left:50),
-              color:Colors.red,
-            )
-          ],
-        ),
+      
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(onPressed: () => print("testButton Clicked"), child: const Text("Text Button")),
+          GestureDetector(onTap: () => print("GestureDetector used"),
+          child: Container(
+            width:200,
+            height: 200,
+            color:Colors.amber
+          )
+          )
+        ]
       )
     );
   }
