@@ -30,29 +30,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final postList = [
-    {
-      "number":"1",
-      "color":Colors.red,
-    },
-    {
-      "number":"2",
-      "color":Colors.yellow,
-    },
-    {
-      "number":"3",
-      "color":Colors.blue,
-    },
-    {
-      "number":"4",
-      "color":Colors.green,
-    },
-    {
-      "number":"5",
-      "color":Colors.pink,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,54 +37,40 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text("Test Title"),
       ),
       //SingleChildScrollView로 묶거나 Scroll기능이 있는 ListView로 만들면 됨.
-      body: SingleChildScrollView(
-        //크게 2개로 나누기 위해 사용
-        child: Column(
-          children: [
-            //반으로 나눈 것중 위쪽 담당.
-            SizedBox(
-              //크기 지정함.
-              height: MediaQuery.of(context).size.height/2,
-              //반에서 또 스크롤 기능 추가.
-              child:SingleChildScrollView(
-                child: Column(
-                children: [  
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    color:Colors.green
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    color:Colors.red
-                  ),
-                ]
-                ),
-              ) 
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height:MediaQuery.of(context).size.height,
+            color: Colors.black26,
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 150,
+              color: Colors.brown,
             )
-          ,
-          SizedBox(
-              height: MediaQuery.of(context).size.height/2,
-              child:SingleChildScrollView(
-                child: Column(
-                children: [  
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    color:Colors.green
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
-                    color:Colors.red
-                  ),
-                ]
-                ),
-              ) 
-            )
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: const EdgeInsets.only(left:40, bottom:150),
+              width:100,
+              height: 100,
+              color:Colors.amber
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Container(
+              margin:const EdgeInsets.only(bottom: 200),
+              width: 200,
+              height: 100,
+              color:Colors.lightBlue,
+            ),
+          )
+        ],
       )
     );
   }
